@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>隐私政策 · 远星游戏工作室（Farstar Games）</title>
+<meta name="description" content="远星游戏工作室（Farstar Games）官方网站及离线独立游戏隐私政策说明。" />
+<meta name="theme-color" content="#02081E" />
+<link rel="icon" href="logo.png" type="image/png" />
+<script>
+window.FS_LANG = (() => {
+  const ok = ["zh", "en"];
+  const q = new URLSearchParams(location.search).get("lang");
+  if (ok.includes(q)) return q;
+  try { const s = localStorage.getItem("farstar.lang"); if (ok.includes(s)) return s; } catch {}
+  for (const l of navigator.languages || [navigator.language]) {
+    if (/^zh/i.test(l)) return "zh";
+    if (/^en/i.test(l)) return "en";
+  }
+  return "zh";
+})();
+document.documentElement.lang = window.FS_LANG === "zh" ? "zh-CN" : "en";
+</script>
+<style>
+@font-face { font-family: "Geist"; src: url("fonts/geist.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Noto SC"; src: url("fonts/noto-sc.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+
+:root {
+  color-scheme: dark;
+  --bg: #02081E;
+  --bg-card: rgba(11, 22, 56, 0.78);
+  --line: rgba(115, 166, 255, 0.18);
+  --ink: #EEF4FF;
+  --ink2: #A6B8D6;
+  --ink3: #6E82A6;
+  --cyan: #1AE0DA;
+  --font: "Geist", "Noto SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.8 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+button { font: inherit; color: inherit; border: 0; background: none; padding: 0; cursor: pointer; }
+.wrap { width: min(780px, 100% - 40px); margin-inline: auto; }
+.nav {
+  border-bottom: 1px solid var(--line);
+  background: rgba(2, 8, 30, 0.9);
+}
+.nav .wrap {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-weight: 600;
+}
+.brand:hover { text-decoration: none; }
+.brand img { width: 32px; height: 32px; border-radius: 8px; }
+.lang {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  font-size: 12.5px;
+}
+.lang button { padding: 3px 11px; border-radius: 999px; color: var(--ink3); }
+.lang button[aria-pressed="true"] { background: var(--cyan); color: #02081E; font-weight: 600; }
+
+main { padding: 52px 0 72px; }
+h1 { margin: 0; font-size: clamp(28px, 4vw, 38px); line-height: 1.25; }
+.updated { margin-top: 8px; font-size: 13.5px; color: var(--ink3); }
+.card {
+  margin-top: 24px;
+  padding: 24px 26px;
+  border-radius: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+}
+h2 { margin: 0 0 10px; font-size: 19px; color: var(--cyan); }
+p { margin: 0 0 10px; color: var(--ink2); font-size: 15px; }
+p:last-child { margin-bottom: 0; }
+.back { display: inline-block; margin-top: 28px; font-size: 14.5px; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="logo.png" alt="远星游戏工作室 Logo" width="32" height="32" />
+      <span data-i="brand">远星游戏工作室</span>
+    </a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 data-i="h1">隐私政策与说明</h1>
+  <div class="updated" data-i="updated">更新日期：2026 年 11 月 16 日</div>
+
+  <div class="card">
+    <h2 data-i="s1.h">1. 工作室官网说明</h2>
+    <p data-i="s1.p1">本网站由远星游戏工作室（Farstar Games）运营并托管于 GitHub Pages，仅作为工作室与作品介绍的纯静态页面，不提供用户注册或登录，也不设置第三方统计、广告追踪或营销 Cookie。</p>
+    <p data-i="s1.p2">访问本页面时，托管平台 GitHub 可能出于安全防护与网络服务需要记录基础连接日志（如 IP 地址），相关处理遵循 GitHub 官方隐私声明。</p>
+  </div>
+
+  <div class="card">
+    <h2 data-i="s2.h">2. 离线游戏应用（含《火柴三国：群英传》当前原型）</h2>
+    <p data-i="s2.p1">工作室当前开发中的《火柴三国：群英传》采用离线本地运行设计，不收集用户的姓名、手机号、精确位置、通讯录或设备识别码，也不向工作室自建服务器回传游戏数据。</p>
+    <p data-i="s2.p2">游戏设置及本地记录（如适用）仅保存在玩家设备本地存储中，卸载应用或清理应用数据即可删除。</p>
+  </div>
+
+  <div class="card">
+    <h2 data-i="s3.h">3. 后续联网或平台接入的更新原则</h2>
+    <p data-i="s3.p1">如后续具体游戏版本接入渠道账号登录、云存档、联机服务或第三方 SDK，工作室将在对应版本发布前同步更新本隐私政策或提供分游戏独立隐私协议，并在应用内明示所需权限与数据用途。</p>
+  </div>
+
+  <div class="card">
+    <h2 data-i="s4.h">4. 联系我们</h2>
+    <p data-i="s4.p1">如有关于本隐私政策或游戏产品的疑问与建议，可通过开发者的公开 GitHub 主页（<a href="https://github.com/arvelvale" target="_blank" rel="noopener noreferrer">github.com/arvelvale</a>）或 X（<a href="https://x.com/ArvelVale" target="_blank" rel="noopener noreferrer">@ArvelVale</a>）联系。</p>
+  </div>
+
+  <a class="back" href="index.html" data-i="back">← 返回工作室主页</a>
+</main>
+
+<script>
+const EN = {
+  "brand": "Farstar Games",
+  "h1": "Privacy Policy",
+  "updated": "Last updated: November 16, 2026",
+  "s1.h": "1. Studio Website",
+  "s1.p1": "This website is operated by Farstar Games and hosted on GitHub Pages as a pure static site. It offers no account registration and uses no cookies, analytics trackers, or third-party ad scripts.",
+  "s1.p2": "When you access this site, GitHub may process standard connection logs (such as IP addresses) to provide hosting and security under the GitHub Privacy Statement.",
+  "s2.h": "2. Offline Game Builds (Including Current Matchstick Three Kingdoms: Heroes Prototype)",
+  "s2.p1": "Current offline builds of Matchstick Three Kingdoms: Heroes run locally on your device without collecting personal identifiers, phone numbers, contacts, location data, or transmitting telemetry to studio servers.",
+  "s2.p2": "Any local preferences or progress saved by the app remain solely on your device and are removed if you clear app data or uninstall.",
+  "s3.h": "3. Future Updates & Online Services",
+  "s3.p1": "If a future release introduces online features, platform SDKs, cloud saves, or accounts, this policy (or a game-specific privacy notice) will be updated prior to release to explain exact permissions and data handling.",
+  "s4.h": "4. Contact",
+  "s4.p1": 'For questions about this policy or our games, please reach out via GitHub (<a href="https://github.com/arvelvale" target="_blank" rel="noopener noreferrer">github.com/arvelvale</a>) or X (<a href="https://x.com/ArvelVale" target="_blank" rel="noopener noreferrer">@ArvelVale</a>).',
+  "back": "← Back to Farstar Games"
+};
+const ZH = {};
+const els = [...document.querySelectorAll("[data-i]")];
+els.forEach((el) => { ZH[el.dataset.i] = el.innerHTML; });
+function applyLang(L) {
+  document.documentElement.lang = L === "zh" ? "zh-CN" : "en";
+  els.forEach((el) => { el.innerHTML = L === "zh" ? ZH[el.dataset.i] : (EN[el.dataset.i] ?? ZH[el.dataset.i]); });
+  document.title = L === "zh" ? "隐私政策 · 远星游戏工作室（Farstar Games）" : "Privacy Policy · Farstar Games";
+  document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === L)));
+  try { localStorage.setItem("farstar.lang", L); } catch {}
+}
+document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+applyLang(window.FS_LANG);
+</script>
+</body>
+</html>

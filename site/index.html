@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>远星游戏工作室 · Farstar Games</title>
+<meta name="description" content="远星游戏工作室（Farstar Games）独立游戏工作室主页：专注于动作格斗与创意独立游戏开发，当前主力打磨《火柴三国：群英传》。" />
+<meta property="og:title" content="远星游戏工作室 · Farstar Games" />
+<meta property="og:description" content="独立游戏工作室主页，专注于动作格斗与创意互动体验，当前在研《火柴三国：群英传》。" />
+<meta property="og:image" content="https://arvelvale.github.io/farstar-games/og.png" />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#02081E" />
+<link rel="icon" href="logo.png" type="image/png" />
+<script>
+window.FS_LANG = (() => {
+  const ok = ["zh", "en"];
+  const q = new URLSearchParams(location.search).get("lang");
+  if (ok.includes(q)) return q;
+  try { const s = localStorage.getItem("farstar.lang"); if (ok.includes(s)) return s; } catch {}
+  for (const l of navigator.languages || [navigator.language]) {
+    if (/^zh/i.test(l)) return "zh";
+    if (/^en/i.test(l)) return "en";
+  }
+  return "zh";
+})();
+document.documentElement.lang = window.FS_LANG === "zh" ? "zh-CN" : "en";
+</script>
+<style>
+@font-face { font-family: "Geist"; src: url("fonts/geist.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Noto SC"; src: url("fonts/noto-sc.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+
+:root {
+  color-scheme: dark;
+  --bg: #02081E;
+  --bg-elev: #081230;
+  --bg-card: rgba(11, 22, 56, 0.78);
+  --line: rgba(115, 166, 255, 0.16);
+  --line-bright: rgba(26, 224, 218, 0.36);
+  --ink: #EEF4FF;
+  --ink2: #A6B8D6;
+  --ink3: #6E82A6;
+  --cyan: #1AE0DA;
+  --cyan-soft: rgba(26, 224, 218, 0.12);
+  --gold: #F4C858;
+  --gold-soft: rgba(244, 200, 88, 0.13);
+  --font: "Geist", "Noto SC", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --wrap: 1080px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(26, 224, 218, 0.10), transparent 38%),
+    radial-gradient(circle at 82% 18%, rgba(244, 200, 88, 0.08), transparent 34%),
+    radial-gradient(1.2px 1.2px at 14% 24%, rgba(255,255,255,.32), transparent),
+    radial-gradient(1px 1px at 42% 14%, rgba(26,224,218,.35), transparent),
+    radial-gradient(1.5px 1.5px at 76% 32%, rgba(244,200,88,.32), transparent),
+    radial-gradient(1px 1px at 88% 68%, rgba(255,255,255,.26), transparent),
+    radial-gradient(1.2px 1.2px at 26% 78%, rgba(26,224,218,.28), transparent);
+  color: var(--ink);
+  font: 16px/1.75 var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+::selection { background: rgba(26, 224, 218, 0.28); color: #fff; }
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
+button { font: inherit; color: inherit; border: 0; background: none; padding: 0; cursor: pointer; }
+h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+
+.wrap { width: min(var(--wrap), 100% - 40px); margin-inline: auto; }
+.eyebrow {
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+/* ---------- 顶栏 ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(2, 8, 30, 0.82);
+  backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav .wrap {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 15.5px;
+  white-space: nowrap;
+}
+.brand:hover { text-decoration: none; }
+.brand img {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-left: auto;
+  font-size: 14.5px;
+}
+.nav-links a { color: var(--ink2); }
+.nav-links a:hover { color: var(--ink); text-decoration: none; }
+.lang {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  font-size: 12.5px;
+  flex: none;
+}
+.lang button {
+  padding: 3px 11px;
+  border-radius: 999px;
+  color: var(--ink3);
+  transition: background .2s, color .2s;
+}
+.lang button[aria-pressed="true"] {
+  background: var(--cyan);
+  color: #02081E;
+  font-weight: 600;
+}
+
+/* ---------- 首屏 ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 44px;
+  align-items: center;
+  padding: 64px 0 76px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px 5px 10px;
+  border-radius: 999px;
+  background: var(--gold-soft);
+  border: 1px solid rgba(244, 200, 88, 0.28);
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 500;
+}
+.badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.hero h1 {
+  margin-top: 18px;
+  font-size: clamp(36px, 5vw, 54px);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+}
+.hero .subname {
+  margin-top: 8px;
+  font-size: 16px;
+  letter-spacing: 0.14em;
+  color: var(--cyan);
+  font-weight: 500;
+}
+.hero .lead {
+  margin-top: 20px;
+  max-width: 34em;
+  font-size: 17px;
+  color: var(--ink2);
+  line-height: 1.8;
+}
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: transform .12s, background .2s, border-color .2s;
+}
+.btn:hover { text-decoration: none; }
+.btn:active { transform: scale(0.98); }
+.btn.pri { background: var(--cyan); color: #02081E; }
+.btn.pri:hover { background: #4CF0EB; }
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.btn.ghost:hover {
+  border-color: var(--line-bright);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.emblem-card {
+  position: relative;
+  padding: 32px;
+  border-radius: 24px;
+  background: linear-gradient(155deg, rgba(14, 28, 70, 0.92), rgba(5, 13, 38, 0.96));
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
+.emblem-card img {
+  width: min(220px, 60vw);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 28px;
+  border: 1px solid rgba(26, 224, 218, 0.25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+}
+.emblem-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  color: var(--ink2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+}
+
+/* ---------- 通用区块 ---------- */
+section { padding: 56px 0; border-top: 1px solid var(--line); }
+.sec-head { max-width: 680px; margin-bottom: 30px; }
+.sec-head h2 { margin-top: 8px; font-size: clamp(26px, 3.4vw, 34px); line-height: 1.25; }
+.sec-head p { margin-top: 12px; color: var(--ink2); }
+
+/* ---------- 三栏卡片 ---------- */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.card {
+  padding: 24px;
+  border-radius: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+}
+.card h3 { font-size: 17.5px; color: var(--ink); }
+.card p { margin-top: 10px; font-size: 14.5px; color: var(--ink2); line-height: 1.75; }
+
+/* ---------- 在研游戏展示 ---------- */
+.game-panel {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  padding: 30px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(24, 18, 42, 0.86), rgba(9, 18, 46, 0.92));
+  border: 1px solid rgba(244, 200, 88, 0.25);
+}
+.game-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+.game-left img {
+  width: 156px;
+  height: 156px;
+  border-radius: 30px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+.game-right h3 { font-size: 26px; line-height: 1.3; }
+.game-right .game-desc { margin-top: 12px; color: var(--ink2); font-size: 15.5px; }
+.specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+.spec-item {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+}
+.spec-item strong { display: block; font-size: 14px; color: var(--gold); font-weight: 600; }
+.spec-item span { display: block; margin-top: 4px; font-size: 13.8px; color: var(--ink2); line-height: 1.65; }
+.hero-roster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.hero-tag {
+  padding: 4px 11px;
+  border-radius: 8px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+/* ---------- 联系与底部 ---------- */
+.contact-box {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  padding: 28px;
+  border-radius: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  align-items: center;
+}
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.footer {
+  padding: 30px 0 44px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+  color: var(--ink3);
+}
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  align-items: center;
+}
+.footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+.footer-links a { color: var(--ink2); }
+
+@media (max-width: 860px) {
+  .hero, .game-panel, .contact-box { grid-template-columns: 1fr; }
+  .grid-3, .specs { grid-template-columns: 1fr; }
+  .contact-links { justify-content: flex-start; }
+}
+@media (max-width: 620px) {
+  .nav-links { display: none; }
+  .nav .wrap { justify-content: space-between; }
+  .hero { padding: 40px 0 54px; gap: 30px; }
+  section { padding: 42px 0; }
+  .game-panel, .contact-box { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="logo.png" alt="远星游戏工作室 Logo" width="34" height="34" />
+      <span data-i="brand">远星游戏工作室</span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#studio" data-i="nav.studio">关于工作室</a>
+      <a href="#games" data-i="nav.games">在研作品</a>
+      <a href="privacy.html" data-i="nav.privacy">隐私政策</a>
+      <a href="#contact" data-i="nav.contact">联系</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero" style="border-top:0;">
+      <div>
+        <div class="badge" data-i="hero.badge">TapTap 个人开发者 · 远星游戏工作室</div>
+        <h1 data-i="hero.h1">远星游戏工作室</h1>
+        <div class="subname">FARSTAR GAMES</div>
+        <p class="lead" data-i="hero.lead">
+          由独立开发者 ArvelVale 创立的个人游戏工作室，专注于动作格斗手感、横版无双玩法与小型创意互动体验。现阶段主力打磨三国题材横版动作手游《火柴三国：群英传》。
+        </p>
+        <div class="cta">
+          <a class="btn pri" href="#games" data-i="hero.cta1">查看在研游戏</a>
+          <a class="btn ghost" href="privacy.html" data-i="hero.cta2">隐私政策与声明</a>
+          <a class="btn ghost" href="https://github.com/arvelvale" target="_blank" rel="noopener noreferrer" data-i="hero.cta3">GitHub</a>
+        </div>
+      </div>
+      <div class="emblem-card">
+        <img src="logo.png" alt="Farstar Games 徽标" width="220" height="220" />
+        <div class="emblem-meta">
+          <span class="chip" data-i="chip.1">独立个人开发</span>
+          <span class="chip" data-i="chip.2">动作格斗 · 横版无双</span>
+          <span class="chip" data-i="chip.3">Web &amp; Android 离线包</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="studio">
+      <div class="sec-head">
+        <div class="eyebrow" data-i="studio.eyebrow">STUDIO · 关于远星</div>
+        <h2 data-i="studio.h2">一个人，也能把战斗手感做扎实</h2>
+        <p data-i="studio.p">远星游戏工作室不虚构团队规模，也没有花哨的商业口号——专注先把玩家上手能感受到的招式节奏、交互反馈与稳定性做到位。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <h3 data-i="c1.h">重手感与战斗规则</h3>
+          <p data-i="c1.p">把轻重连招、防御破防、短窗识破弹反、霸体与位移技能做成可反复验证的清晰系统，让操作有正反馈。</p>
+        </article>
+        <article class="card">
+          <h3 data-i="c2.h">轻量离线优先</h3>
+          <p data-i="c2.p">当前在研作品采用纯本地运行架构，不强制联网，不收集无关设备隐私数据，打开即可直接开打。</p>
+        </article>
+        <article class="card">
+          <h3 data-i="c3.h">持续打磨与公开迭代</h3>
+          <p data-i="c3.p">以《火柴三国：群英传》作为工作室第一款正式打磨推进的项目，后续会在本页同步版本记录与新作入口。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="games">
+      <div class="sec-head">
+        <div class="eyebrow" data-i="games.eyebrow">IN DEVELOPMENT · 在研作品</div>
+        <h2 data-i="games.h2">火柴三国：群英传</h2>
+        <p data-i="games.p">融合火柴人线条动效与三国武将招式的横版无双与 1v1 格斗独立手游（原型开发及发行准备中）。</p>
+      </div>
+      <div class="game-panel">
+        <div class="game-left">
+          <img src="game-sanguo-icon.png" alt="火柴三国：群英传 图标" width="156" height="156" />
+          <span class="status-pill" data-i="game.status">原型开发中 · Android &amp; Web</span>
+        </div>
+        <div class="game-right">
+          <h3 data-i="game.title">《火柴三国：群英传》</h3>
+          <p class="game-desc" data-i="game.desc">
+            支持手机横屏虚拟摇杆与弧形技能轮盘，同时兼容桌面端键鼠。已实装 6 位可玩三国武将、50 个技能与各自 3 段轻击连招与重击，内置本地合成音效与实时战斗判定。
+          </p>
+          <div class="specs">
+            <div class="spec-item">
+              <strong data-i="sp1.t">破黄巾 · 长卷无双</strong>
+              <span data-i="sp1.d">横跨四阵的长卷推进关卡，击破木栅拒马与黄巾精英阵线，迎战头目程远志。</span>
+            </div>
+            <div class="spec-item">
+              <strong data-i="sp2.t">群雄逐鹿 · 1v1 擂台</strong>
+              <span data-i="sp2.d">三局两胜硬核对决，包含防御守势条、0.16 秒识破反击、护盾与无双定格技。</span>
+            </div>
+            <div class="spec-item">
+              <strong data-i="sp3.t">特色武将机制</strong>
+              <span data-i="sp3.d">含赤兔骑乘冲阵、太平御符护盾、黄天雷锁强束缚与雷印易伤、切剑破防等专属招式。</span>
+            </div>
+            <div class="spec-item">
+              <strong data-i="sp4.t">当前状态</strong>
+              <span data-i="sp4.d">已完成离线 Android APK 与 Web 打包构建流程，正在推进 TapTap 开发者接入与测试准备。</span>
+            </div>
+          </div>
+          <div class="hero-roster" aria-label="已实装武将">
+            <span class="hero-tag" data-i="h.liu">刘备 · 双股剑</span>
+            <span class="hero-tag" data-i="h.guan">关羽 · 青龙偃月刀</span>
+            <span class="hero-tag" data-i="h.zhang">张飞 · 丈八蛇矛</span>
+            <span class="hero-tag" data-i="h.zhao">赵云 · 龙胆亮银枪</span>
+            <span class="hero-tag" data-i="h.lv">吕布 · 方天画戟</span>
+            <span class="hero-tag" data-i="h.jiao">张角 · 九节杖雷符</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-box">
+        <div>
+          <div class="eyebrow" data-i="ct.eyebrow">CONTACT · 联系工作室</div>
+          <h2 style="margin-top:8px;font-size:24px;" data-i="ct.h2">反馈、试玩交流与合作</h2>
+          <p style="margin-top:10px;color:var(--ink2);font-size:15px;" data-i="ct.p">
+            如需联系开发者或反馈试玩问题，欢迎通过 GitHub 或 X 联系。如后续公开专属游戏客服邮箱，将在本栏与隐私政策页同步更新。
+          </p>
+        </div>
+        <div class="contact-links">
+          <a class="btn pri" href="https://github.com/arvelvale" target="_blank" rel="noopener noreferrer">GitHub · @arvelvale</a>
+          <a class="btn ghost" href="https://x.com/ArvelVale" target="_blank" rel="noopener noreferrer">X · @ArvelVale</a>
+          <a class="btn ghost" href="https://arvelvale.github.io/" target="_blank" rel="noopener noreferrer" data-i="ct.blog">开发者博客</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-row">
+    <div>
+      <span data-i="ft.copy">© 2026 远星游戏工作室 (Farstar Games) · ArvelVale</span>
+      <span style="margin-left:10px;color:var(--ink3);" data-i="ft.note">本页面无 Cookie、无统计脚本、无第三方外部请求。</span>
+    </div>
+    <div class="footer-links">
+      <a href="privacy.html" data-i="ft.privacy">隐私政策</a>
+      <a href="https://github.com/arvelvale" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://arvelvale.github.io/" target="_blank" rel="noopener noreferrer" data-i="ft.blog">个人博客</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const EN = {
+  "brand": "Farstar Games",
+  "nav.studio": "Studio",
+  "nav.games": "Games",
+  "nav.privacy": "Privacy",
+  "nav.contact": "Contact",
+  "hero.badge": "Indie Game Studio · TapTap Developer",
+  "hero.h1": "Farstar Games",
+  "hero.lead": "An independent solo game studio founded by ArvelVale, focused on responsive action-fighting combat and creative interactive experiences. Currently developing the stick-figure Three Kingdoms action game Matchstick Three Kingdoms: Heroes.",
+  "hero.cta1": "Explore Games",
+  "hero.cta2": "Privacy Policy",
+  "hero.cta3": "GitHub",
+  "chip.1": "Solo Indie Studio",
+  "chip.2": "Action & Side-Scrolling Musou",
+  "chip.3": "Offline-First Web & Android",
+  "studio.eyebrow": "STUDIO · ABOUT US",
+  "studio.h2": "Small team, tight combat feel",
+  "studio.p": "Farstar Games keeps things grounded—no inflated studio claims, just hands-on focus on hit feedback, timing windows, and reliable builds.",
+  "c1.h": "Combat & Game Feel First",
+  "c1.p": "Combos, guard breaks, 0.16s parry windows, super armor, and crisp mobility skills are built around clear rules players can master.",
+  "c2.h": "Offline & Lightweight",
+  "c2.p": "Current builds run offline with zero forced sign-ins or background personal data collection—launch and play directly.",
+  "c3.h": "Built to Grow Over Time",
+  "c3.p": "Starting with Matchstick Three Kingdoms: Heroes, this homepage tracks active builds, studio policies, and upcoming indie titles.",
+  "games.eyebrow": "IN DEVELOPMENT · FEATURED TITLE",
+  "games.h2": "Matchstick Three Kingdoms: Heroes",
+  "games.p": "A stick-figure side-scrolling musou and 1v1 fighting game inspired by classic Three Kingdoms heroes (in active development).",
+  "game.status": "In Development · Android & Web",
+  "game.title": "Matchstick Three Kingdoms: Heroes",
+  "game.desc": "Supports landscape virtual-stick and arc skill controls on mobile as well as keyboard/mouse on desktop. Features 6 playable generals, 50 skills, 3-hit light combos, heavy attacks, and synthesized local sound effects.",
+  "sp1.t": "Yellow Turban Campaign",
+  "sp1.d": "A 4-stage side-scrolling push across a 7,620px battlefield—smash barricades, clear enemy formations, and challenge bosses.",
+  "sp2.t": "1v1 Arena Duels",
+  "sp2.d": "Best-of-3 duels with guard meters, 0.16s deflect parries, destructible shields, and screen-freeze Musou ultimates.",
+  "sp3.t": "Distinct Hero Mechanics",
+  "sp3.d": "Includes mounted Red Hare charges, talisman shields, lightning bind marks, and mid-combo weapon swaps.",
+  "sp4.t": "Current Progress",
+  "sp4.d": "Offline Android APK and Web bundling pipelines are up and running; preparing TapTap developer listings and playtest materials.",
+  "h.liu": "Liu Bei · Twin Swords",
+  "h.guan": "Guan Yu · Green Dragon Crescent Blade",
+  "h.zhang": "Zhang Fei · Serpent Spear",
+  "h.zhao": "Zhao Yun · Silver Dragon Spear",
+  "h.lv": "Lu Bu · Sky Piercer Halberd",
+  "h.jiao": "Zhang Jiao · Yellow Heaven Staff",
+  "ct.eyebrow": "CONTACT",
+  "ct.h2": "Playtest Feedback & Inquiries",
+  "ct.p": "Reach out via GitHub or X for game feedback, bug reports, or collaboration. A dedicated support email will be listed here and on the privacy page when launched publicly.",
+  "ct.blog": "Developer Blog",
+  "ft.copy": "© 2026 Farstar Games · ArvelVale",
+  "ft.note": "Static site with zero cookies, analytics, or third-party requests.",
+  "ft.privacy": "Privacy Policy",
+  "ft.blog": "Blog"
+};
+
+const ZH = {};
+const els = [...document.querySelectorAll("[data-i]")];
+els.forEach((el) => { ZH[el.dataset.i] = el.innerHTML; });
+
+function applyLang(L) {
+  window.FS_LANG = L;
+  document.documentElement.lang = L === "zh" ? "zh-CN" : "en";
+  els.forEach((el) => {
+    el.innerHTML = L === "zh" ? ZH[el.dataset.i] : (EN[el.dataset.i] ?? ZH[el.dataset.i]);
+  });
+  document.title = L === "zh" ? "远星游戏工作室 · Farstar Games" : "Farstar Games · Indie Game Studio";
+  document.querySelector('meta[name="description"]').content = L === "zh"
+    ? "远星游戏工作室（Farstar Games）独立游戏工作室主页：专注于动作格斗与创意独立游戏开发，当前主力打磨《火柴三国：群英传》。"
+    : "Official homepage of Farstar Games, an independent game studio developing Matchstick Three Kingdoms: Heroes.";
+  document.querySelectorAll(".lang button").forEach((b) => {
+    b.setAttribute("aria-pressed", String(b.dataset.lang === L));
+  });
+  try { localStorage.setItem("farstar.lang", L); } catch {}
+}
+
+document.querySelectorAll(".lang button").forEach((b) => {
+  b.addEventListener("click", () => applyLang(b.dataset.lang));
+});
+
+const nav = document.getElementById("nav");
+addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 8), { passive: true });
+applyLang(window.FS_LANG);
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+name: Pages
+
+# 工作室静态主页：site/ 原样发布。字体、图标和分享图均本地自托管，不依赖第三方 CDN。
+# 在 GitHub 公开仓库 Settings → Pages 选择 "GitHub Actions" 后，推送 main 即自动部署。
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check referenced site files exist
+        run: |
+          for f in index.html privacy.html logo.png game-sanguo-icon.png og.png fonts/geist.woff2 fonts/noto-sc.woff2; do
+            test -f "site/$f" || { echo "missing site/$f"; exit 1; }
+          done
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: deploy-pages@v4
